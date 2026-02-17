@@ -92,3 +92,13 @@
 - [x] Integrar API real com Home Screen
 - [x] Implementar sistema de votação em counters
 - [x] Ativar overlay flutuante no Settings
+
+
+## Implementações Finais v2
+
+- [x] Conectar API real do swgt.io com web scraping (lib/swgt-real-api.ts)
+- [x] Adicionar compartilhamento de estratégias (lib/share-service.ts, components/share-buttons.tsx)
+- [x] Implementar notificações push completas (lib/push-notifications-service.ts, hooks/use-push-notifications.ts)
+- [x] Integrar notificações no Home screen
+- [x] Integrar compartilhamento em search-results
+- [x] Otimizações finais e testes (36 testes passando)

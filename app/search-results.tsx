@@ -4,6 +4,7 @@ import { ScreenContainer } from "@/components/screen-container";
 import { CompositionCard } from "@/components/composition-card";
 import { CounterCard } from "@/components/counter-card";
 import { CounterVote } from "@/components/counter-vote";
+import { ShareButtons } from "@/components/share-buttons";
 import { searchDefenses, getMonster } from "@/lib/mock-data";
 import { useState } from "react";
 
@@ -165,6 +166,27 @@ export default function SearchResultsScreen() {
                   initialVotes={selectedCounter.votes || 0}
                   onVoteSuccess={(direction) => {
                     console.log(`✅ Voto ${direction} registrado para ${selectedCounter.id}`);
+                  }}
+                />
+              </View>
+
+              {/* Share Component */}
+              <View className="pt-3 border-t border-border">
+                <ShareButtons
+                  data={{
+                    defense: {
+                      monsters: defense.composition.monsters as unknown as string[],
+                      rating: defense.composition.rating || 0,
+                    },
+                    counter: {
+                      monsters: selectedCounter.monsters as unknown as string[],
+                      rating: selectedCounter.rating,
+                      strategy: selectedCounter.strategy,
+                      difficulty: selectedCounter.buildNotes || "Medium",
+                    },
+                  }}
+                  onShareSuccess={() => {
+                    console.log("✅ Estratégia compartilhada com sucesso");
                   }}
                 />
               </View>

@@ -5,11 +5,13 @@ import { MonsterCard } from "@/components/monster-card";
 import { AppCover } from "@/components/app-cover";
 import { searchMonsters, MONSTERS } from "@/lib/mock-data";
 import { searchDefenseFromSwgt, getTrendingDefenses, checkSwgtHealth } from "@/lib/swgt-real-api";
+import { usePushNotifications } from "@/hooks/use-push-notifications";
 import { useRouter } from "expo-router";
 import { cn } from "@/lib/utils";
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { notifyNewTrendingCounter } = usePushNotifications();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMonsters, setSelectedMonsters] = useState<string[]>([]);
   const [showMonsterGrid, setShowMonsterGrid] = useState(false);
@@ -24,18 +26,29 @@ export default function HomeScreen() {
       setApiStatus("checking");
       const isHealthy = await checkSwgtHealth();
       setApiStatus(isHealthy ? "connected" : "offline");
+      
+      // Notificar sobre novo trending counter
+      if (isHealthy) {
+        setTimeout(() => {
+          notifyNewTrendingCounter(
+            "Susano, Garo, Orion",
+            "Lushen, Galleon, Taor",
+            9.2
+          ).catch(console.error);
+        }, 3000);
+      }
     };
     checkApi();
-  }, []);
+  }, [notifyNewTrendingCounter]);
 
   // Carregar defesas trending
   useEffect(() => {
     const loadTrending = async () => {
-      const trending = await getTrendingDefenses();
-      setTrendingDefenses(trending.slice(0, 3));
+      const defenses = await getTrendingDefenses();
+      setTrendingDefenses(defenses);
     };
     loadTrending();
-  }, []);
+  }, [notifyNewTrendingCounter]);
 
   const handleMonsterSelect = (monsterId: string) => {
     if (selectedMonsters.includes(monsterId)) {
