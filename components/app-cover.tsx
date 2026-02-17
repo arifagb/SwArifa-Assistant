@@ -8,7 +8,7 @@ export function AppCover() {
   return (
     <View className="w-full h-64 rounded-2xl overflow-hidden border border-border shadow-lg">
       <Image
-        source={require("@/assets/images/cover.png")}
+        source={require("@/assets/images/cover-new.png")}
         className="w-full h-full"
         resizeMode="cover"
       />
