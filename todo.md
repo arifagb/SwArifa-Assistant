@@ -64,10 +64,10 @@
 
 ## Integração com swgt.io
 
-- [x] Criar serviço de API para buscar dados do swgt.io
-- [x] Implementar cache de dados locais
-- [x] Sincronização automática periódica (estrutura pronta)
-- [x] Tratamento de erros de conexão
+- [x] Criar serviço de API para buscar dados do swgt.io (swgt-api-real.ts)
+- [x] Implementar cache de dados locais com expiry
+- [x] Sincronização automática periódica (schedulePeriodicSync)
+- [x] Tratamento de erros de conexão com fallback
 - [x] Modo offline com dados em cache
 
 ## Modo Overlay
@@ -78,8 +78,33 @@
 - [x] Redimensionamento da janela flutuante (estrutura pronta)
 - [x] Posicionamento persistente da janela (estrutura pronta)
 
+## Notificações Push
+
+- [x] Setup de notificações (setupNotifications)
+- [x] Notificar novo counter trending (notifyNewTrendingCounter)
+- [x] Notificar composição favorita atualizada (notifyFavoriteCompositionUpdated)
+- [x] Notificar sincronização completa (notifySyncComplete)
+- [x] Agendar sincronização periódica (schedulePeriodicSync)
+- [x] Rate limiting de notificações
+
+## Capa do App
+
+- [x] Melhorar imagem de capa (cover.png otimizado)
+- [x] Criar componente AppCover com gradiente
+- [x] Integrar capa na Home screen
+- [x] Usar LinearGradient para overlay
+
+## Skill Reutilizável
+
+- [x] Criar skill mobile-app-expo-developer
+- [x] Documentar workflow completo (6 fases)
+- [x] Incluir padrões comuns (screen template, API caching, notifications)
+- [x] Adicionar troubleshooting guide
+- [x] Validar skill com quick_validate.py
+
 ## Publicação
 
-- [ ] Gerar APK para Android
-- [ ] Gerar IPA para iOS
-- [ ] Criar documentação de uso
+- [ ] Gerar APK para Android (eas build --platform android)
+- [ ] Gerar IPA para iOS (eas build --platform ios)
+- [ ] Testar em dispositivos reais
+- [ ] Publicar nas lojas (Google Play, App Store)

@@ -2,6 +2,7 @@ import { ScrollView, Text, View, TouchableOpacity, TextInput, FlatList } from "r
 import { useState } from "react";
 import { ScreenContainer } from "@/components/screen-container";
 import { MonsterCard } from "@/components/monster-card";
+import { AppCover } from "@/components/app-cover";
 import { searchMonsters, MONSTERS } from "@/lib/mock-data";
 import { useRouter } from "expo-router";
 import { cn } from "@/lib/utils";
@@ -53,10 +54,13 @@ export default function HomeScreen() {
     <ScreenContainer className="p-4">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
         <View className="gap-6">
+          {/* App Cover */}
+          <AppCover />
+
           {/* Header */}
           <View className="gap-2">
-            <Text className="text-3xl font-bold text-foreground">SW Assistant</Text>
-            <Text className="text-sm text-muted">
+            <Text className="text-2xl font-bold text-foreground">SwArifa Assistant</Text>
+            <Text className="text-xs text-muted">
               Encontre counters para suas defesas
             </Text>
           </View>
