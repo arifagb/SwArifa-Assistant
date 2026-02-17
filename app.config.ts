@@ -32,8 +32,9 @@ const env = {
   appSlug: "sw-assistant-app",
   // S3 URL of the app logo - set this to the URL returned by generate_image when creating custom logo
   // Leave empty to use the default icon from assets/images/icon.png
-  logoUrl: "",
+  logoUrl: "https://private-us-east-1.manuscdn.com/sessionFile/HY1VCjBVgYN5aoy1bvZyag/sandbox/wFNYNAGCOIX9vQytbrTvjP-img-1_1771354684000_na1fn_aWNvbg.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvSFkxVkNqQlZnWU41YW95MWJ2WnlhZy9zYW5kYm94L3dGTllOQUdDT0lYOXZReXRiclR2alAtaW1nLTFfMTc3MTM1NDY4NDAwMF9uYTFmbl9hV052YmcucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=UGIvuGdkdIHzHcjsgGCyHukJw1bapMZoWenyJCMvrrgVV~uBO8w14jt-GjsW4BNZM9S9IAna4yAZl~ou4kknnfbU4vOwasUf-yc5GdZW4yMzAT4kX~DgjYI7VO378QEOFfnxT8k06b4dBxXa6bsDRp6m~7JmJ-N2rf8LydTLKJKSqsajZPwS8R8ejZNclrEuogbZxrbFgZdGraEIY2~xQHSwMDP1HLYFsnhai5S-SWl2cNgYS9v0R5qJokoIaFIPdjFicn0k~qDsPK0GLEsvpENFp3OwuqSMWa8HkMrNsrELoJ6z-LCMsFoOu5Ef-2XMb2zJl2XqP1crfKiaKRBYXQ__",
   scheme: schemeFromBundleId,
+  primaryColor: "#1E90FF",
   iosBundleId: bundleId,
   androidPackage: bundleId,
 };
