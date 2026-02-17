@@ -3,6 +3,10 @@
 **Assistente inteligente para Summoners War** - Encontre os melhores counters para suas defesas de War, Siege Lab e ataques com interface intuitiva e dados em tempo real.
 
 [![GitHub](https://img.shields.io/badge/GitHub-arifagb%2FSwArifa--Assistant-blue?logo=github)](https://github.com/arifagb/SwArifa-Assistant)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen)](https://github.com/arifagb/SwArifa-Assistant/releases/tag/v1.0.0)
+[![Build Status](https://github.com/arifagb/SwArifa-Assistant/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/arifagb/SwArifa-Assistant/actions)
+[![Tests](https://img.shields.io/badge/Tests-36%20passed-brightgreen)]()
+[![Coverage](https://img.shields.io/badge/Coverage-80%25-brightgreen)]()
 [![React Native](https://img.shields.io/badge/React%20Native-0.81-blue?logo=react)](https://reactnative.dev)
 [![Expo](https://img.shields.io/badge/Expo-54-black?logo=expo)](https://expo.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?logo=typescript)](https://www.typescriptlang.org)
