@@ -1,19 +1,58 @@
-import { ScrollView, Text, View, TouchableOpacity } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { CompositionCard } from "@/components/composition-card";
 import { CounterCard } from "@/components/counter-card";
+import { CounterVote } from "@/components/counter-vote";
 import { searchDefenses, getMonster } from "@/lib/mock-data";
 import { useState } from "react";
 
 export default function SearchResultsScreen() {
   const router = useRouter();
-  const { monsters } = useLocalSearchParams<{ monsters: string }>();
+  const { monsters, result } = useLocalSearchParams<{ monsters: string; result?: string }>();
   const [selectedCounterId, setSelectedCounterId] = useState<string | null>(null);
 
   const monsterIds = monsters ? JSON.parse(monsters) : [];
-  const defenses = searchDefenses(monsterIds);
-  const defense = defenses[0];
+  
+  // Usar resultado da API se disponível, senão usar mock data
+  let defense: any;
+  if (result) {
+    try {
+      const apiResult = JSON.parse(result);
+      defense = {
+        composition: {
+          id: apiResult.defense.id,
+          monsters: apiResult.defense.monsters,
+          rating: apiResult.defense.rating,
+          strengths: [
+            "Defesa balanceada com bom controle",
+            "Monstros com builds versáteis",
+          ],
+          weaknesses: [
+            "Vulnerável a speed teams",
+            "Sem imunidade a debuffs críticos",
+          ],
+          notes: ["Considere adicionar imunidade", "Ajuste os builds conforme necessário"],
+        },
+        counters: apiResult.counters.map((c: any) => ({
+          id: c.id,
+          monsters: c.monsters,
+          rating: c.rating,
+          strategy: c.strategy,
+          buildNotes: `Dificuldade: ${c.difficulty}`,
+          votes: c.votes,
+          trending: c.trending,
+        })),
+      };
+    } catch (error) {
+      console.error("Erro ao parsear resultado da API:", error);
+      const defenses = searchDefenses(monsterIds);
+      defense = defenses[0];
+    }
+  } else {
+    const defenses = searchDefenses(monsterIds);
+    defense = defenses[0];
+  }
 
   if (!defense) {
     return (
@@ -29,7 +68,7 @@ export default function SearchResultsScreen() {
     );
   }
 
-  const selectedCounter = defense.counters.find((c) => c.id === selectedCounterId);
+  const selectedCounter = defense.counters.find((c: any) => c.id === selectedCounterId);
 
   return (
     <ScreenContainer className="p-4">
@@ -55,7 +94,7 @@ export default function SearchResultsScreen() {
             {/* Strengths */}
             <View className="gap-2">
               <Text className="text-sm font-semibold text-success">Pontos Fortes</Text>
-              {defense.composition.strengths.map((strength, idx) => (
+              {defense.composition.strengths.map((strength: string, idx: number) => (
                 <Text key={idx} className="text-sm text-foreground leading-relaxed">
                   • {strength}
                 </Text>
@@ -65,7 +104,7 @@ export default function SearchResultsScreen() {
             {/* Weaknesses */}
             <View className="gap-2">
               <Text className="text-sm font-semibold text-error">Pontos Fracos</Text>
-              {defense.composition.weaknesses.map((weakness, idx) => (
+              {defense.composition.weaknesses.map((weakness: string, idx: number) => (
                 <Text key={idx} className="text-sm text-foreground leading-relaxed">
                   • {weakness}
                 </Text>
@@ -76,7 +115,7 @@ export default function SearchResultsScreen() {
             {defense.composition.notes.length > 0 && (
               <View className="gap-2">
                 <Text className="text-sm font-semibold text-primary">Notas</Text>
-                {defense.composition.notes.map((note, idx) => (
+                {defense.composition.notes.map((note: string, idx: number) => (
                   <Text key={idx} className="text-sm text-muted leading-relaxed">
                     • {note}
                   </Text>
@@ -90,7 +129,7 @@ export default function SearchResultsScreen() {
             <Text className="text-sm font-semibold text-foreground">
               {defense.counters.length} Counters Encontrados
             </Text>
-            {defense.counters.map((counter) => (
+            {defense.counters.map((counter: any) => (
               <TouchableOpacity
                 key={counter.id}
                 onPress={() =>
@@ -102,7 +141,7 @@ export default function SearchResultsScreen() {
             ))}
           </View>
 
-          {/* Counter Details */}
+          {/* Counter Details with Vote */}
           {selectedCounter && (
             <View className="bg-surface rounded-lg p-4 border border-primary gap-3">
               <Text className="text-sm font-semibold text-primary">Estratégia Completa</Text>
@@ -117,6 +156,18 @@ export default function SearchResultsScreen() {
                   </Text>
                 </View>
               )}
+
+              {/* Vote Component */}
+              <View className="pt-3 border-t border-border">
+                <Text className="text-xs text-muted mb-2">Esta estratégia foi útil?</Text>
+                <CounterVote
+                  counterId={selectedCounter.id}
+                  initialVotes={selectedCounter.votes || 0}
+                  onVoteSuccess={(direction) => {
+                    console.log(`✅ Voto ${direction} registrado para ${selectedCounter.id}`);
+                  }}
+                />
+              </View>
             </View>
           )}
 

@@ -1,6 +1,7 @@
 import { ScrollView, Text, View, TouchableOpacity, Switch } from "react-native";
 import { useState, useEffect } from "react";
 import { ScreenContainer } from "@/components/screen-container";
+import { FloatingOverlay, useFloatingOverlay } from "@/components/floating-overlay";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useColors } from "@/hooks/use-colors";
 import { useOverlayMode } from "@/hooks/use-overlay-mode";
@@ -10,6 +11,7 @@ export default function SettingsScreen() {
   const colorScheme = useColorScheme();
   const colors = useColors();
   const { isOverlayEnabled, toggleOverlayMode } = useOverlayMode();
+  const { visible, show, hide } = useFloatingOverlay();
   const [isDarkMode, setIsDarkMode] = useState(colorScheme === "dark");
   const [overlayEnabled, setOverlayEnabled] = useState(isOverlayEnabled);
 
@@ -50,11 +52,24 @@ export default function SettingsScreen() {
                 onValueChange={(value) => {
                   setOverlayEnabled(value);
                   toggleOverlayMode(value);
+                  if (value) {
+                    show();
+                  } else {
+                    hide();
+                  }
                 }}
                 trackColor={{ false: colors.border, true: colors.primary }}
                 thumbColor={overlayEnabled ? colors.primary : colors.muted}
               />
             </View>
+            {overlayEnabled && (
+              <TouchableOpacity
+                onPress={show}
+                className="bg-primary rounded-lg p-3 items-center"
+              >
+                <Text className="text-background font-semibold text-sm">Abrir Overlay Flutuante</Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           {/* Appearance Section */}
@@ -82,7 +97,7 @@ export default function SettingsScreen() {
                 <Text className="text-sm font-semibold text-foreground">Português (BR)</Text>
                 <Text className="text-xs text-muted">Idioma do aplicativo</Text>
               </View>
-              <Text className="text-sm text-accent font-semibold">✓</Text>
+              <Text className="text-sm text-primary font-semibold">✓</Text>
             </View>
           </View>
 
@@ -112,7 +127,7 @@ export default function SettingsScreen() {
               <View className="h-px bg-border" />
               <View className="flex-row items-center justify-between">
                 <Text className="text-sm text-muted">Desenvolvido por</Text>
-                <Text className="text-sm font-semibold text-accent">Manus</Text>
+                <Text className="text-sm font-semibold text-primary">Manus</Text>
               </View>
               <View className="h-px bg-border" />
               <View className="gap-2">
@@ -144,6 +159,15 @@ export default function SettingsScreen() {
           <View className="h-10" />
         </View>
       </ScrollView>
+
+      {/* Floating Overlay Component */}
+      <FloatingOverlay
+        visible={visible}
+        onClose={hide}
+        onSearch={(query) => {
+          console.log("Busca no overlay:", query);
+        }}
+      />
     </ScreenContainer>
   );
 }

@@ -20,7 +20,9 @@
 ## Integração de Dados
 
 - [x] API real do swgt.io com web scraping (lib/swgt-real-api.ts)
-- [x] API service com caching (estrutura)
+- [x] Integrar API com Home Screen (app/(tabs)/index.tsx)
+- [x] Trending defenses na Home
+- [x] Status da API (online/offline)
 - [x] AsyncStorage para persistência (estrutura)
 - [x] Tratamento de erros (estrutura)
 
@@ -47,6 +49,24 @@
 - [ ] Testar overlay em Android real
 - [ ] Testar overlay em iOS real
 
+## Votação em Counters
+
+- [x] Componente CounterVote (components/counter-vote.tsx)
+- [x] Botões 👍 e 👎 para votar
+- [x] Integração com voteCounter() API
+- [x] Feedback visual de voto
+- [x] Integrar votação em search-results.tsx
+
+## Overlay Flutuante
+
+- [x] Componente FloatingOverlay (components/floating-overlay.tsx)
+- [x] Modal redimensionável
+- [x] Controles de tamanho (+/-)
+- [x] SearchBar integrada
+- [x] Integrar no Settings (app/(tabs)/settings.tsx)
+- [x] Botão para abrir overlay
+- [x] useFloatingOverlay() hook
+
 ## Testes
 
 - [x] Testes unitários para API real (lib/swgt-real-api.test.ts)
@@ -66,3 +86,9 @@
 - [x] INTEGRATION_GUIDE.md - Guia de integração da skill
 - [x] TESTING_GUIDE.md - Guia de testes em dispositivos reais
 - [x] PUBLISHING_GUIDE.md - Guia de publicação nas lojas
+
+## Implementações Finais Concluídas
+
+- [x] Integrar API real com Home Screen
+- [x] Implementar sistema de votação em counters
+- [x] Ativar overlay flutuante no Settings
