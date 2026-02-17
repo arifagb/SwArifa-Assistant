@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ScreenContainer } from "@/components/screen-container";
 import { MonsterCard } from "@/components/monster-card";
 import { AppCover } from "@/components/app-cover";
+import { ElementFilter, filterByElement, type Element } from "@/components/element-filter";
 import { searchMonsters, MONSTERS } from "@/lib/mock-data";
 import { searchDefenseFromSwgt, getTrendingDefenses, checkSwgtHealth } from "@/lib/swgt-real-api";
 import { usePushNotifications } from "@/hooks/use-push-notifications";
@@ -19,6 +20,7 @@ export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [apiStatus, setApiStatus] = useState<"connected" | "offline" | "checking">("checking");
   const [trendingDefenses, setTrendingDefenses] = useState<any[]>([]);
+  const [selectedElement, setSelectedElement] = useState<Element>(null);
 
   // Verificar status da API ao iniciar
   useEffect(() => {
@@ -288,6 +290,9 @@ export default function HomeScreen() {
           {/* Divider */}
           <View className="h-px bg-border" />
 
+          {/* Element Filter */}
+          <ElementFilter selectedElement={selectedElement} onElementChange={setSelectedElement} />
+
           {/* Search by Grid */}
           <View className="gap-3">
             <View className="flex-row items-center justify-between">
@@ -306,7 +311,7 @@ export default function HomeScreen() {
             {showMonsterGrid && (
               <View className="gap-3">
                 <View className="flex-row flex-wrap gap-2 justify-center">
-                  {allMonsters.map((monster) => (
+                  {filterByElement(allMonsters, selectedElement).map((monster) => (
                     <TouchableOpacity
                       key={monster.id}
                       onPress={() => handleMonsterSelect(monster.id)}

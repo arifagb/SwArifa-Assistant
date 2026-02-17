@@ -6,11 +6,11 @@ export function AppCover() {
   const colors = useColors();
 
   return (
-    <View className="w-full h-64 rounded-2xl overflow-hidden border border-border shadow-lg">
+    <View className="w-full rounded-2xl overflow-hidden border border-border shadow-lg" style={{ aspectRatio: 9 / 16 }}>
       <Image
         source={require("@/assets/images/cover-new.png")}
         className="w-full h-full"
-        resizeMode="cover"
+        resizeMode="contain"
       />
       {/* Overlay com gradiente */}
       <LinearGradient
