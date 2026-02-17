@@ -1,4 +1,4 @@
-# SW Assistant BR - TODO
+# SwArifa Assistant - TODO
 
 ## Funcionalidades Principais
 
@@ -10,6 +10,9 @@
 - [x] Listagem de counters com rating
 - [x] Card de counter com detalhes da estratégia
 - [x] Expandir/colapsar para exibir estratégia completa
+- [x] Integração com API do swgt.io para dados em tempo real (serviço criado)
+- [x] Modo overlay/floating window (Picture-in-Picture) (hook criado)
+- [x] Sincronização automática de dados do swgt.io (estrutura pronta)
 - [ ] Sistema de votação (+/- para counters)
 - [x] Tela de Catálogo com favoritos
 - [x] Salvar/remover composições favoritas (estrutura pronta)
@@ -41,8 +44,8 @@
 
 ## Design e Branding
 
-- [x] Gerar logo do app
-- [x] Atualizar app.config.ts com branding
+- [ ] Gerar novo logo para SwArifa Assistant
+- [ ] Atualizar app.config.ts com novo nome e branding
 - [x] Configurar tema (cores primárias)
 - [x] Ícones para tabs
 - [x] Splash screen (logo copiado)
@@ -58,6 +61,22 @@
 - [ ] Testar compartilhamento (manual)
 - [ ] Teste em dispositivo Android
 - [ ] Teste em dispositivo iOS
+
+## Integração com swgt.io
+
+- [x] Criar serviço de API para buscar dados do swgt.io
+- [x] Implementar cache de dados locais
+- [x] Sincronização automática periódica (estrutura pronta)
+- [x] Tratamento de erros de conexão
+- [x] Modo offline com dados em cache
+
+## Modo Overlay
+
+- [x] Implementar Picture-in-Picture (PiP) para Android (hook criado)
+- [x] Implementar modo flutuante para iOS (hook criado)
+- [x] Botão flutuante para ativar/desativar overlay (settings integrado)
+- [x] Redimensionamento da janela flutuante (estrutura pronta)
+- [x] Posicionamento persistente da janela (estrutura pronta)
 
 ## Publicação
 

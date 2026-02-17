@@ -3,16 +3,20 @@ import { useState, useEffect } from "react";
 import { ScreenContainer } from "@/components/screen-container";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useColors } from "@/hooks/use-colors";
+import { useOverlayMode } from "@/hooks/use-overlay-mode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SettingsScreen() {
   const colorScheme = useColorScheme();
   const colors = useColors();
+  const { isOverlayEnabled, toggleOverlayMode } = useOverlayMode();
   const [isDarkMode, setIsDarkMode] = useState(colorScheme === "dark");
+  const [overlayEnabled, setOverlayEnabled] = useState(isOverlayEnabled);
 
   useEffect(() => {
     setIsDarkMode(colorScheme === "dark");
-  }, [colorScheme]);
+    setOverlayEnabled(isOverlayEnabled);
+  }, [colorScheme, isOverlayEnabled]);
 
   const handleClearCache = async () => {
     try {
@@ -31,6 +35,26 @@ export default function SettingsScreen() {
           <View className="gap-2">
             <Text className="text-3xl font-bold text-foreground">Configurações</Text>
             <Text className="text-sm text-muted">Personalize o app</Text>
+          </View>
+
+          {/* Overlay Section */}
+          <View className="gap-3">
+            <Text className="text-lg font-semibold text-foreground">Modo Overlay</Text>
+            <View className="bg-surface rounded-lg p-4 border border-border flex-row items-center justify-between">
+              <View className="flex-1">
+                <Text className="text-sm font-semibold text-foreground">Ativar Overlay</Text>
+                <Text className="text-xs text-muted">Sobrepõe o jogo sem sair</Text>
+              </View>
+              <Switch
+                value={overlayEnabled}
+                onValueChange={(value) => {
+                  setOverlayEnabled(value);
+                  toggleOverlayMode(value);
+                }}
+                trackColor={{ false: colors.border, true: colors.primary }}
+                thumbColor={overlayEnabled ? colors.primary : colors.muted}
+              />
+            </View>
           </View>
 
           {/* Appearance Section */}
@@ -107,7 +131,7 @@ export default function SettingsScreen() {
             <Text className="text-lg font-semibold text-foreground">Créditos</Text>
             <View className="bg-surface rounded-lg p-4 border border-border gap-3">
               <Text className="text-xs text-muted leading-relaxed">
-                SW Assistant BR é um aplicativo não oficial para Summoners War. Todos os dados de
+                SwArifa Assistant é um aplicativo não oficial para Summoners War. Todos os dados de
                 composições e counters são baseados no excelente trabalho da comunidade em swgt.io.
               </Text>
               <Text className="text-xs text-muted leading-relaxed">
